@@ -70,7 +70,12 @@ class Client(object):
         ).json()
 
     def add_image(self, collection_id, file, **data):
-        files = {'file': open(file, 'rb')}
+        if isinstance(file, str):
+            files = {'file': open(file, 'rb')}
+        elif isinstance(file, bytes):
+            files = file
+        else:
+            raise ValueError('file must be a string or bytes')
 
         return self.request(
             'post',
