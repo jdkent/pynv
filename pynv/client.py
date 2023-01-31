@@ -73,7 +73,7 @@ class Client(object):
         if isinstance(file, str):
             files = {'file': open(file, 'rb')}
         elif isinstance(file, bytes):
-            files = file
+            files = file.decode('latin1')
         else:
             raise ValueError('file must be a string or bytes')
 
